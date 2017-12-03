@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/new/png">
+        <file>3dPressed.png</file>
+        <file>3dStatic.png</file>
+        <file>curvePressed.png</file>
+        <file>curveStatic.png</file>
+        <file>cutPressed.png</file>
+        <file>cutStatic.png</file>
+        <file>ellipsePressed.png</file>
+        <file>ellipseStatic.png</file>
+        <file>fillPressed.png</file>
+        <file>fillStatic.png</file>
+        <file>linePressed.png</file>
+        <file>lineStatic.png</file>
+        <file>polygonPressed.png</file>
+        <file>polygonStatic.png</file>
+        <file>rotatePressed.png</file>
+        <file>rotateStatic.png</file>
+        <file>translationPressed.png</file>
+        <file>translationStatic.png</file>
+        <file>zoomPressed.png</file>
+        <file>zoomStatic.png</file>
+        <file>roundPressed.png</file>
+        <file>roundStatic.png</file>
+    </qresource>
+</RCC>
