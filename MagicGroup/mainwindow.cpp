@@ -12,6 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->myGLWidget->get_buttonjudge(this->graph_judge);
     this->mytoolbar();
+    QString str = "background-color : rgb(0,0,0)";
+    this->ui->showcolor_label->setStyleSheet(str);
+    this->ui->myGLWidget->get_information(ui->spinBox_red,ui->spinBox_green,ui->spinBox_blue,ui->showcolor_label,ui->stackedWidget);
+    connect(ui->ColorConfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(setcolor()));
 }
 
 MainWindow::~MainWindow()

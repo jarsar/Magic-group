@@ -9,6 +9,20 @@ MyGLWidget::~MyGLWidget()
 {
 
 }
+void MyGLWidget::get_information(QSpinBox *red, QSpinBox *green, QSpinBox *blue, QLabel *labelshowcolor, QStackedWidget *mystack){
+    this->red=red;
+    this->green=green;
+    this->blue=blue;
+    this->labelshowcolor=labelshowcolor;
+    this->mystack=mystack;
+}
+
+void MyGLWidget::setcolor(){
+    QColor c(this->red->value(),this->green->value(),this->blue->value());
+    QString str = "background-color: rgb(" + red->text() + ", " + green->text() + ", " +blue->text() + ");";
+    this->labelshowcolor->setStyleSheet(str);
+    this->color=c;
+}
 
 void MyGLWidget::initializeGL()
 {
@@ -32,12 +46,6 @@ void MyGLWidget::resizeGL()
 
 void MyGLWidget::mousePressEvent(QMouseEvent *event){
     if(event->buttons()&Qt::LeftButton){
-//        QPoint point1;
-//        point1.setX(50);
-//        point1.setY(50);
-//        round=new Round();
-//        round->setround(point1,20);
-//        round->drawround(&this->painter);
         this->create_graph();
         this->x0=event->x();
         this->y0=event->y();
@@ -57,7 +65,6 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event){
 }
 
 void MyGLWidget::mouseReleaseEvent(QMouseEvent *event){
-//    if(event->buttons()&Qt::RightButton){
         if(check_flag==true){
             this->draw();
         }
@@ -66,7 +73,6 @@ void MyGLWidget::mouseReleaseEvent(QMouseEvent *event){
         this->get_graphinformation();
         this->save_graph();
         this->draw();
-//    }
 }
 
 void MyGLWidget::draw(){
@@ -79,6 +85,11 @@ void MyGLWidget::draw(){
         break;
     case 2:
         round->drawround(&this->painter);
+        break;
+    case 3:
+        break;
+    case 4:
+        ellipse->drawellipse(&this->painter);
         break;
     default:
         break;
@@ -100,17 +111,29 @@ void MyGLWidget::redraw(){
     for(int i=0;i<this->rounds.size();i++){
         this->rounds[i]->drawround(&this->painter);
     }
+    //ellipse redraw
+    for(int i=0;i<this->ellipses.size();i++){
+        this->ellipses[i]->drawellipse(&this->painter);
+    }
     painter.end();
 }
 
 void MyGLWidget::create_graph(){
+    this->graphflag=this->buttonjudge[0];
     switch (this->buttonjudge[0]) {
     case 1:
         line=new Line();
+        line->set_color(color);
         break;
     case 2:
         round=new Round();
+
         break;
+    case 3:
+        break;
+    case 4:
+        ellipse=new Ellipse();
+
     default:
         break;
     }
@@ -128,6 +151,18 @@ void MyGLWidget::get_graphinformation(){
         GLint R=qSqrt((this->x1-this->x0)*(this->x1-this->x0)+(this->y1-this->y0)*(this->y1-this->y0));
         round->setround(center,R);}
         break;
+    case 3:
+        break;
+    case 4:{
+        QPoint point;
+        GLint a,b;
+        point.setX(this->x0);
+        point.setY(this->y0);
+        a=qFabs(double(this->x1-this->x0));
+        b=qFabs(double(this->y1-this->y0));
+        ellipse->setellipse(point,a,b);
+    }
+        break;
     default:
         break;
     }
@@ -141,7 +176,16 @@ void MyGLWidget::save_graph(){
     case 2:
         rounds.push_back(this->round);
         break;
+    case 3:
+        break;
+    case 4:
+        ellipses.push_back(this->ellipse);
+        break;
     default:
         break;
     }
+}
+
+int *MyGLWidget::get_graphflag(){
+    return &this->graphflag;
 }

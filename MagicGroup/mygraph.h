@@ -1,23 +1,24 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 #include<QPainter>
-#include <QMainWindow>
 #include<QPen>
 #include<qopengl.h>
 #include<qmath.h>
-#include<myglwidget.h>
+#include<QVector>
+#include<QColor>
+enum Kind{
+    line,round,ellipse,curve,polygon,_3D
+};
 class MyGraph{
 protected:
-     MyGraph(){}
-    ~MyGraph(){}
-//    int flag;
-//    virtual void paintEvent(QPaintEvent*);
-//    virtual void LineDDA(QPainter *painter);
+    Kind kind;
+    QPen *pen;
 public:
-//    virtual void setline(GLint x0,GLint y0,GLint x1,GLint y1);//line
-//    //virtual void setround(QPoint p,GLint r);//round
-//    int getflag(){return this->flag;}
-//    void draw(QPainter *painter);
+     MyGraph();
+     void set_color(QColor color);
+     virtual void set_points(){};
+     virtual void draw(){};
 };
 
 #endif // GRAPH_H
+

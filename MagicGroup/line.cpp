@@ -5,6 +5,7 @@ Line::Line(){
 }
 
 void Line::LineDDA(QPainter *painter){
+    painter->setPen(*this->pen);
     GLfloat m,dx,dy,x,y,flag;
         dx=x1-x0;
         dy=y1-y0;
@@ -43,4 +44,12 @@ void Line::setline(GLint x0, GLint y0, GLint x1, GLint y1){
     this->y0=y0;
     this->x1=x1;
     this->y1=y1;
+}
+
+void Line::set_points(){
+    this->setline();
+}
+
+void Line::draw(){
+    this->LineDDA();
 }

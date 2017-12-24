@@ -9,7 +9,6 @@ private:
     GLint r;
 private:
     void draw_eightpoint(QPainter *p,QPoint point);
-    QPoint point_rotate(QPoint point,int angle);
 public:
     Round();
     ~Round();

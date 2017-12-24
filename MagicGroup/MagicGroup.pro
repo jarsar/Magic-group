@@ -32,7 +32,9 @@ SOURCES += \
     mygraph.cpp \
     curve.cpp \
     ellipse.cpp \
-    round.cpp
+    round.cpp \
+    fill.cpp \
+    polygon.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +44,9 @@ HEADERS += \
     mygraph.h \
     curve.h \
     ellipse.h \
-    round.h
+    round.h \
+    fill.h \
+    polygon.h
 
 FORMS += \
     mainwindow.ui

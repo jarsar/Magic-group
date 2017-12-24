@@ -87,11 +87,3 @@ void Round::draw_eightpoint(QPainter *p,QPoint point){
         p->drawPoint(points[i]);
         }
 }
-
-QPoint Round::point_rotate(QPoint point, int angle){
-    qreal PI=3.1415926;
-    qreal radian =(PI/180)*angle;
-    point.setX(point.x()*qCos(radian)-point.y()*qSin(radian));
-    point.setY(point.x()*qSin(radian)-point.y()*qCos(radian));
-    return point;
-}
