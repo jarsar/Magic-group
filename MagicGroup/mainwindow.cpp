@@ -14,8 +14,28 @@ MainWindow::MainWindow(QWidget *parent) :
     this->mytoolbar();
     QString str = "background-color : rgb(0,0,0)";
     this->ui->showcolor_label->setStyleSheet(str);
+    time_stackedwidget_refresh=new QTimer(this);
+    connect(time_stackedwidget_refresh,SIGNAL(timeout()),this,SLOT(set_choosemenu()));
+    time_stackedwidget_refresh->start(1);
+    connect(this,SIGNAL(choosemenu(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
+    //设置颜色属性
     this->ui->myGLWidget->get_information(ui->spinBox_red,ui->spinBox_green,ui->spinBox_blue,ui->showcolor_label,ui->stackedWidget);
     connect(ui->ColorConfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(setcolor()));
+    //设置图形属性
+    this->ui->myGLWidget->set_line(ui->spinBox_lx0,ui->spinBox_ly0,ui->spinBox_lx1,ui->spinBox_ly1);
+    this->ui->myGLWidget->set_round(ui->spinBox_rR,ui->spinBox_rx,ui->spinBox_ry);
+    this->ui->myGLWidget->set_ellipse(ui->spinBox_ex,ui->spinBox_ey,ui->spinBox_ea,ui->spinBox_eb);
+    this->ui->myGLWidget->set_polygon(ui->spinBox_px,ui->spinBox_py);
+    //修改直线
+    connect(ui->lineconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_line()));
+    //修改圆
+    connect(ui->roundconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_round()));
+    //修改椭圆
+    connect(ui->ellipseconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_ellipse()));
+    //画多边形
+    connect(ui->startButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(create_polygon()));
+    connect(ui->addconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_polygon()));
+    connect(ui->polygonconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_polygon_finally()));
 }
 
 MainWindow::~MainWindow()
@@ -67,4 +87,44 @@ void MainWindow::mytoolbar(){
     QAction *triDAction=new QAction(QString::QString("3D"));
     triDToolButton=new ToolButton(QIcon::QIcon(":/new/png/3dStatic.png"),QIcon::QIcon(":/new/png/3dPressed.png"),count,graph_judge,triDAction);
     ui->mainToolBar->addWidget(triDToolButton);
+}
+
+void MainWindow::set_choosemenu(){
+    switch (this->graph_judge[0]) {
+    case 1:
+        emit choosemenu(1);
+        break;
+    case 2:
+        emit choosemenu(2);
+        break;
+    case 3:
+        emit choosemenu(3);
+        break;
+    case 4:
+        emit choosemenu(4);
+        break;
+    case 5:
+        emit choosemenu(5);
+        break;
+    case 6:
+        emit choosemenu(6);
+        break;
+    case 7:
+        emit choosemenu(7);
+        break;
+    case 8:
+        emit choosemenu(8);
+        break;
+    case 9:
+        emit choosemenu(9);
+        break;
+    case 10:
+        emit choosemenu(10);
+        break;
+    case 11:
+        emit choosemenu(11);
+        break;
+    default:
+        break;
+    }
 }

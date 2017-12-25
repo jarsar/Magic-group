@@ -1,8 +1,7 @@
 #include "ellipse.h"
 
-Ellipse::Ellipse()
-{
-
+Ellipse::Ellipse(){
+    this->kind=kellipse;
 }
 
 void Ellipse::setellipse(QPoint point, GLint a, GLint b){
@@ -12,6 +11,7 @@ void Ellipse::setellipse(QPoint point, GLint a, GLint b){
 }
 
 void Ellipse::drawellipse(QPainter *painter){
+    painter->setPen(*this->pen);
     double sqa=a*a;
     double sqb=b*b;
     double d=sqb+sqa*(-b+0.25);
@@ -59,4 +59,8 @@ void Ellipse::draw_fourpoints(QPainter *p,int x,int y){
     p->drawPoint(x2,y2);
     p->drawPoint(x3,y3);
     p->drawPoint(x4,y4);
+}
+
+void Ellipse::draw(QPainter *painter){
+    this->drawellipse(painter);
 }

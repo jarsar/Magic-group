@@ -80,7 +80,7 @@
         <item row="3" column="0">
          <widget class="QPushButton" name="ColorConfirmButton">
           <property name="text">
-           <string>确认</string>
+           <string>修改</string>
           </property>
          </widget>
         </item>
@@ -106,7 +106,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="page"/>
         <widget class="QWidget" name="page_line">
@@ -142,7 +142,7 @@
            <rect>
             <x>0</x>
             <y>30</y>
-            <width>111</width>
+            <width>122</width>
             <height>341</height>
            </rect>
           </property>
@@ -164,7 +164,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_x0"/>
+            <widget class="QSpinBox" name="spinBox_lx0">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">
@@ -174,7 +178,11 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_y0"/>
+            <widget class="QSpinBox" name="spinBox_ly0">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_4">
@@ -184,7 +192,11 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_x1"/>
+            <widget class="QSpinBox" name="spinBox_lx1">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_5">
@@ -194,7 +206,18 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QSpinBox" name="spinBox_y1"/>
+            <widget class="QSpinBox" name="spinBox_ly1">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="lineconfirmButton">
+             <property name="text">
+              <string>修改</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -225,31 +248,49 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>30</y>
-            <width>118</width>
-            <height>341</height>
+            <y>40</y>
+            <width>122</width>
+            <height>331</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout">
+           <property name="labelAlignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>x0</string>
+              <string>x</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox"/>
+            <widget class="QSpinBox" name="spinBox_rx">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_8">
              <property name="text">
-              <string>y0</string>
+              <string>y</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_2"/>
+            <widget class="QSpinBox" name="spinBox_ry">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinBox_rR">
+             <property name="maximum">
+              <number>260</number>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_9">
@@ -258,8 +299,12 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_3"/>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="roundconfirmButton">
+             <property name="text">
+              <string>修改</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -292,30 +337,41 @@
            <rect>
             <x>0</x>
             <y>30</y>
-            <width>118</width>
+            <width>123</width>
             <height>341</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout_2">
+           <property name="labelAlignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>x0</string>
+              <string>x</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_4"/>
+            <widget class="QSpinBox" name="spinBox_ex">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>y0</string>
+              <string>y</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_5"/>
+            <widget class="QSpinBox" name="spinBox_ey">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_13">
@@ -325,7 +381,11 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_6"/>
+            <widget class="QSpinBox" name="spinBox_ea">
+             <property name="maximum">
+              <number>314</number>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_14">
@@ -335,12 +395,112 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QSpinBox" name="spinBox_7"/>
+            <widget class="QSpinBox" name="spinBox_eb">
+             <property name="maximum">
+              <number>260</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="ellipseconfirmButton">
+             <property name="text">
+              <string>修改</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
         </widget>
-        <widget class="QWidget" name="page_polygon"/>
+        <widget class="QWidget" name="page_polygon">
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>0</y>
+            <width>71</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>多边形</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QWidget" name="formLayoutWidget_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>121</width>
+            <height>341</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_3">
+           <property name="labelAlignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="formAlignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>x</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinBox_px">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>y</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="spinBox_py">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="addconfirmButton">
+             <property name="text">
+              <string>确认</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QPushButton" name="polygonconfirmButton">
+             <property name="text">
+              <string>完成</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="startButton">
+             <property name="text">
+              <string>开始</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
         <widget class="QWidget" name="page_translation"/>
         <widget class="QWidget" name="page_rotate"/>
         <widget class="QWidget" name="page_zoom"/>

@@ -1,7 +1,7 @@
 #include<line.h>
 
 Line::Line(){
-
+    this->kind=kline;
 }
 
 void Line::LineDDA(QPainter *painter){
@@ -46,10 +46,6 @@ void Line::setline(GLint x0, GLint y0, GLint x1, GLint y1){
     this->y1=y1;
 }
 
-void Line::set_points(){
-    this->setline();
-}
-
-void Line::draw(){
-    this->LineDDA();
+void Line::draw(QPainter *painter){
+    this->LineDDA(painter);
 }

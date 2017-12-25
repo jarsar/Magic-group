@@ -2,7 +2,7 @@
 #define ELLIPSE_H
 #include<mygraph.h>
 
-class Ellipse
+class Ellipse:public MyGraph
 {
 private:
     QPoint point;
@@ -10,10 +10,10 @@ private:
     GLint b;
 private:
     void draw_fourpoints(QPainter *p,int x,int y);
+    void drawellipse(QPainter *painter);
 public:
     Ellipse();
-    ~Ellipse(){};
     void setellipse(QPoint point,GLint a,GLint b);
-    void drawellipse(QPainter *painter);
+    void draw(QPainter *painter);
 };
 #endif // ELLIPSE_H

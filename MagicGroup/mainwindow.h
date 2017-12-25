@@ -24,7 +24,7 @@ private:
 private:
     Ui::MainWindow *ui;
 private:
-    QTimer *time_referesh_buttonflag;
+    QTimer *time_stackedwidget_refresh;
 private:
     ToolButton *lineToolButton;
     ToolButton *curveToolButton;
@@ -40,6 +40,11 @@ private:
 public:
     int *count;//用于判断toolbar上是哪个action
     int *graph_judge;//用于判断哪个action处于active状态
+private:
+signals:
+    void choosemenu(int index);
+private slots:
+    void set_choosemenu();
 };
 
 #endif // MAINWINDOW_H

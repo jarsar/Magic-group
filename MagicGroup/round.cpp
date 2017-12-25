@@ -1,12 +1,7 @@
 #include "round.h"
 
-Round::Round()
-{
-
-}
-
-Round::~Round(){
-
+Round::Round(){
+    this->kind=kround;
 }
 
 void Round::setround(QPoint p, GLint r){
@@ -16,6 +11,7 @@ void Round::setround(QPoint p, GLint r){
 }
 
 void Round::drawround(QPainter *painter){
+    painter->setPen(*this->pen);
     QPoint point;
     double d;
     point.setX(0);
@@ -86,4 +82,8 @@ void Round::draw_eightpoint(QPainter *p,QPoint point){
         }
         p->drawPoint(points[i]);
         }
+}
+
+void Round::draw(QPainter *painter){
+    this->drawround(painter);
 }

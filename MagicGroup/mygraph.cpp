@@ -8,3 +8,7 @@ MyGraph::MyGraph(){
 void MyGraph::set_color(QColor color){
     pen->setColor(color);
 }
+
+Kind MyGraph::get_Kind(){
+    return this->kind;
+}

@@ -2,18 +2,18 @@
 #define ROUND_H
 
 #include<mygraph.h>
-class Round
+class Round:public MyGraph
 {
 private:
     QPoint center;
     GLint r;
 private:
     void draw_eightpoint(QPainter *p,QPoint point);
+    void drawround(QPainter *painter);
 public:
     Round();
-    ~Round();
     void setround(QPoint p,GLint r);
-    void drawround(QPainter *painter);
+    void draw(QPainter *painter);
 };
 
 #endif // ROUND_H

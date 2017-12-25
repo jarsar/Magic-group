@@ -17,11 +17,98 @@ void MyGLWidget::get_information(QSpinBox *red, QSpinBox *green, QSpinBox *blue,
     this->mystack=mystack;
 }
 
+void MyGLWidget::set_line(QSpinBox *lx0, QSpinBox *ly0, QSpinBox *lx1, QSpinBox *ly1){
+    this->lx0=lx0;
+    this->ly0=ly0;
+    this->lx1=lx1;
+    this->ly1=ly1;
+}
+
+void MyGLWidget::set_round(QSpinBox *rR, QSpinBox *rx, QSpinBox *ry){
+    this->rR=rR;
+    this->rx=rx;
+    this->ry=ry;
+}
+
+void MyGLWidget::set_ellipse(QSpinBox *ex, QSpinBox *ey, QSpinBox *ea, QSpinBox *eb){
+    this->ex=ex;
+    this->ey=ey;
+    this->ea=ea;
+    this->eb=eb;
+}
+
+void MyGLWidget::set_polygon(QSpinBox *px, QSpinBox *py){
+    this->px=px;
+    this->py=py;
+}
+
 void MyGLWidget::setcolor(){
-    QColor c(this->red->value(),this->green->value(),this->blue->value());
+    QColor color(this->red->value(),this->green->value(),this->blue->value());
     QString str = "background-color: rgb(" + red->text() + ", " + green->text() + ", " +blue->text() + ");";
     this->labelshowcolor->setStyleSheet(str);
-    this->color=c;
+    graphs[graphs.size()-1]->set_color(color);
+    painter.begin(this);
+    graphs[graphs.size()-1]->draw(&this->painter);
+    if(graphs[graphs.size()-1]->get_Kind()==kpolygon){
+        graphs[graphs.size()-1]->redraw(&this->painter);
+    }
+    painter.end();
+}
+
+void MyGLWidget::draw_line(){
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    graph->setline(this->lx0->value(),this->ly0->value(),this->lx1->value(),this->ly1->value());
+    graphs.pop_back();
+    graphs.push_back(graph);
+    this->redraw();
+}
+
+void MyGLWidget::draw_round(){
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    QPoint p;
+    p.setX(rx->value());
+    p.setY(ry->value());
+    graph->setround(p,this->rR->value());
+    graphs.pop_back();
+    graphs.push_back(graph);
+    this->redraw();
+}
+
+void MyGLWidget::create_polygon(){
+    polygon=new Polygon();
+    graph=polygon;
+}
+
+void MyGLWidget::draw_ellipse(){
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    QPoint p;
+    p.setX(ex->value());
+    p.setY(ey->value());
+    graph->setellipse(p,this->ea->value(),this->eb->value());
+    graphs.pop_back();
+    graphs.push_back(graph);
+    this->redraw();
+}
+
+void MyGLWidget::draw_polygon(){
+    QPoint p;
+    p.setX(this->px->value());
+    p.setY(this->py->value());
+    graph->setpolygon(p);
+    painter.begin(this);
+    graph->draw(&painter);
+    painter.end();
+}
+
+void MyGLWidget::draw_polygon_finally(){
+    graphs.push_back(graph);
+    this->redraw();
 }
 
 void MyGLWidget::initializeGL()
@@ -71,7 +158,7 @@ void MyGLWidget::mouseReleaseEvent(QMouseEvent *event){
         this->x1=event->x();
         this->y1=event->y();
         this->get_graphinformation();
-        this->save_graph();
+        this->graphs.push_back(graph);
         this->draw();
 }
 
@@ -79,20 +166,8 @@ void MyGLWidget::draw(){
     glClear(GL_COLOR_BUFFER_BIT);
     this->redraw();
     painter.begin(this);
-    switch (this->buttonjudge[0]) {
-    case 1:
-        line->LineDDA(&this->painter);
-        break;
-    case 2:
-        round->drawround(&this->painter);
-        break;
-    case 3:
-        break;
-    case 4:
-        ellipse->drawellipse(&this->painter);
-        break;
-    default:
-        break;
+    if(graph->get_Kind()!=kpolygon){
+        graph->draw(&this->painter);
     }
     painter.end();
 }
@@ -103,17 +178,11 @@ void MyGLWidget::get_buttonjudge(int *buttonjudge){
 
 void MyGLWidget::redraw(){
     painter.begin(this);
-    //line redraw
-    for(int i=0;i<this->lines.size();i++){
-        this->lines[i]->LineDDA(&this->painter);
-    }
-    //round redraw
-    for(int i=0;i<this->rounds.size();i++){
-        this->rounds[i]->drawround(&this->painter);
-    }
-    //ellipse redraw
-    for(int i=0;i<this->ellipses.size();i++){
-        this->ellipses[i]->drawellipse(&this->painter);
+    for(int i=0;i<this->graphs.size();i++){
+        graphs[i]->draw(&this->painter);
+        if(graphs[i]->get_Kind()==kpolygon){
+            graphs[i]->redraw(&painter);
+        }
     }
     painter.end();
 }
@@ -121,19 +190,25 @@ void MyGLWidget::redraw(){
 void MyGLWidget::create_graph(){
     this->graphflag=this->buttonjudge[0];
     switch (this->buttonjudge[0]) {
-    case 1:
+    case 1:{
         line=new Line();
-        line->set_color(color);
+        graph=line;
+    }
         break;
-    case 2:
+    case 2:{
         round=new Round();
-
+        graph=round;
+    }
         break;
     case 3:
         break;
-    case 4:
+    case 4:{
         ellipse=new Ellipse();
-
+        graph=ellipse;
+    }
+        break;
+    case 5:
+        break;
     default:
         break;
     }
@@ -162,24 +237,6 @@ void MyGLWidget::get_graphinformation(){
         b=qFabs(double(this->y1-this->y0));
         ellipse->setellipse(point,a,b);
     }
-        break;
-    default:
-        break;
-    }
-}
-
-void MyGLWidget::save_graph(){
-    switch (this->buttonjudge[0]) {
-    case 1:
-        lines.push_back(this->line);
-        break;
-    case 2:
-        rounds.push_back(this->round);
-        break;
-    case 3:
-        break;
-    case 4:
-        ellipses.push_back(this->ellipse);
         break;
     default:
         break;
