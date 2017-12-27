@@ -13,6 +13,7 @@ class MyGraph{
 protected:
     Kind kind;
     QPen *pen;
+    bool is_fill;
 public:
      MyGraph();
      void set_color(QColor color);
@@ -22,6 +23,8 @@ public:
      virtual void setpolygon(QPoint point){};
      virtual void draw(QPainter*painter){};
      virtual void redraw(QPainter *painter){};
+     virtual void fillgraph(QPainter *painter){};
+     bool get_fill();
      Kind get_Kind();
 };
 

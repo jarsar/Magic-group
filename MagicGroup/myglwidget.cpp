@@ -55,6 +55,16 @@ void MyGLWidget::setcolor(){
     painter.end();
 }
 
+void MyGLWidget::fill_color(){
+    QColor color(this->red->value(),this->green->value(),this->blue->value());
+    QString str = "background-color: rgb(" + red->text() + ", " + green->text() + ", " +blue->text() + ");";
+    this->labelshowcolor->setStyleSheet(str);
+    this->graph->set_color(color);
+    painter.begin(this);
+    this->graph->fillgraph(&this->painter);
+    painter.end();
+}
+
 void MyGLWidget::draw_line(){
     painter.begin(this);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -182,6 +192,9 @@ void MyGLWidget::redraw(){
         graphs[i]->draw(&this->painter);
         if(graphs[i]->get_Kind()==kpolygon){
             graphs[i]->redraw(&painter);
+        }
+        if(graphs[i]->get_fill()==true){
+            graphs[i]->fillgraph(&this->painter);
         }
     }
     painter.end();

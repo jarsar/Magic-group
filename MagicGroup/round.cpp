@@ -87,3 +87,23 @@ void Round::draw_eightpoint(QPainter *p,QPoint point){
 void Round::draw(QPainter *painter){
     this->drawround(painter);
 }
+
+void Round::fillgraph(QPainter *painter){
+    this->is_fill=true;
+    painter->setPen(*this->pen);
+    for(int i=this->r;i>=0;i--){
+        int x1,y1,x2,y2;
+        x1=this->center.x()-qSqrt(r*r-i*i);
+        x2=this->center.x()+qSqrt(r*r-i*i);
+        y1=this->center.y()-i;
+        this->link_twopoints(x1,x2,y1,painter);
+        }
+}
+
+void Round::link_twopoints(int x1,int x2,int y1,QPainter *painter){
+    int y2=2*this->center.y()-y1;
+    for(int j=x1;j<=x2;j++){
+    painter->drawPoint(j,y1);
+    painter->drawPoint(j,y2);
+    }
+}

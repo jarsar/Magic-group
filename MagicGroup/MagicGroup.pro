@@ -33,7 +33,6 @@ SOURCES += \
     curve.cpp \
     ellipse.cpp \
     round.cpp \
-    fill.cpp \
     polygon.cpp
 
 HEADERS += \
@@ -45,7 +44,6 @@ HEADERS += \
     curve.h \
     ellipse.h \
     round.h \
-    fill.h \
     polygon.h
 
 FORMS += \

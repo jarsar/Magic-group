@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->startButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(create_polygon()));
     connect(ui->addconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_polygon()));
     connect(ui->polygonconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_polygon_finally()));
+    //圆，椭圆，多边形填充
+    connect(ui->fillButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(fill_color()));
 }
 
 MainWindow::~MainWindow()

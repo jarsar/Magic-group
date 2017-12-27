@@ -64,3 +64,26 @@ void Ellipse::draw_fourpoints(QPainter *p,int x,int y){
 void Ellipse::draw(QPainter *painter){
     this->drawellipse(painter);
 }
+
+void Ellipse::fillgraph(QPainter *painter){
+    painter->setPen(*this->pen);
+    this->is_fill=true;
+    int x1,x2,y1,k;
+    for(double i=b;i>=0;i--){
+        k=(1.0-(i*i)/(b*b))*(a*a);
+        x1=-qSqrt(k);
+        x2=-x1;
+        x1+=this->point.x();
+        x2+=this->point.x();
+        y1=i+this->point.y();
+        this->draw_twopoints(x1,x2,y1,painter);
+    }
+}
+
+void Ellipse::draw_twopoints(int x1, int x2, int y1, QPainter *painter){
+    int y2=2*this->point.y()-y1;
+    for(int j=x1;j<=x2;j++){
+        painter->drawPoint(j,y1);
+        painter->drawPoint(j,y2);
+    }
+}

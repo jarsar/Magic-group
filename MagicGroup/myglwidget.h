@@ -87,6 +87,7 @@ private slots:
     void create_polygon();
     void draw_polygon();
     void draw_polygon_finally();
+    void fill_color();
 };
 
 #endif // GLWIDGET_H
