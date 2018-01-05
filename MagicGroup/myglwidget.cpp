@@ -42,6 +42,19 @@ void MyGLWidget::set_polygon(QSpinBox *px, QSpinBox *py){
     this->py=py;
 }
 
+void MyGLWidget::set_graph_change(QSpinBox *tx, QSpinBox *ty, QSpinBox *rotate_x, QSpinBox *rotate_y, QDoubleSpinBox *angel, QSpinBox *zoom_x, QSpinBox *zoom_y, QDoubleSpinBox *factor_x, QDoubleSpinBox *factor_y)
+{
+    this->tx=tx;
+    this->ty=ty;
+    this->rotate_x=rotate_x;
+    this->rotate_y=rotate_y;
+    this->angel=angel;
+    this->zoom_x=zoom_x;
+    this->zoom_y=zoom_y;
+    this->factor_x=factor_x;
+    this->factor_y=factor_y;
+}
+
 void MyGLWidget::setcolor(){
     QColor color(this->red->value(),this->green->value(),this->blue->value());
     QString str = "background-color: rgb(" + red->text() + ", " + green->text() + ", " +blue->text() + ");";
@@ -63,6 +76,126 @@ void MyGLWidget::fill_color(){
     painter.begin(this);
     this->graph->fillgraph(&this->painter);
     painter.end();
+}
+
+void MyGLWidget::translation_graph()
+{
+    switch (this->graph->get_Kind()) {
+    case kline:{
+        line->translation_line(this->tx->value(),this->ty->value());
+        this->graphs.pop_back();
+        this->graph=line;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kround:{
+        round->translation_round(this->tx->value(),this->ty->value());
+        this->graphs.pop_back();
+        this->graph=round;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kellipse:{
+            ellipse->translation_ellipse(this->tx->value(),this->ty->value());
+            this->graphs.pop_back();
+            this->graph=ellipse;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    case kpolygon:{
+            polygon->traslation_polygon(this->tx->value(),this->ty->value());
+            this->graphs.pop_back();
+            this->graph=polygon;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    default:
+        break;
+    }
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    this->redraw();
+}
+
+void MyGLWidget::rotate_graph()
+{
+    switch (this->graph->get_Kind()) {
+    case kline:{
+        line->rotate_line(rotate_x->value(),rotate_y->value(),angel->value());
+        this->graphs.pop_back();
+        this->graph=line;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kround:{
+        round->rotate_round(rotate_x->value(),rotate_y->value(),angel->value());
+        this->graphs.pop_back();
+        this->graph=round;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kellipse:{
+            ellipse->rotate_ellipse(rotate_x->value(),rotate_y->value(),angel->value());
+            this->graphs.pop_back();
+            this->graph=ellipse;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    case kpolygon:{
+            polygon->rotate_polygon(rotate_x->value(),rotate_y->value(),angel->value());
+            this->graphs.pop_back();
+            this->graph=polygon;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    default:
+        break;
+    }
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    this->redraw();
+}
+
+void MyGLWidget::zoom_graph()
+{
+    switch (this->graph->get_Kind()) {
+    case kline:{
+        line->zoom_line(zoom_x->value(),zoom_y->value(),factor_x->value(),factor_y->value());
+        this->graphs.pop_back();
+        this->graph=line;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kround:{
+        round->zoom_round(zoom_x->value(),zoom_y->value(),factor_x->value(),factor_y->value());
+        this->graphs.pop_back();
+        this->graph=round;
+        this->graphs.push_back(this->graph);
+    }
+        break;
+    case kellipse:{
+            ellipse->zoom_ellipse(zoom_x->value(),zoom_y->value(),factor_x->value(),factor_y->value());
+            this->graphs.pop_back();
+            this->graph=ellipse;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    case kpolygon:{
+            polygon->zoom_polyogn(zoom_x->value(),zoom_y->value(),factor_x->value(),factor_y->value());
+            this->graphs.pop_back();
+            this->graph=polygon;
+            this->graphs.push_back(this->graph);
+        }
+        break;
+    default:
+        break;
+    }
+    painter.begin(this);
+    glClear(GL_COLOR_BUFFER_BIT);
+    painter.end();
+    this->redraw();
 }
 
 void MyGLWidget::draw_line(){
@@ -189,12 +322,20 @@ void MyGLWidget::get_buttonjudge(int *buttonjudge){
 void MyGLWidget::redraw(){
     painter.begin(this);
     for(int i=0;i<this->graphs.size();i++){
-        graphs[i]->draw(&this->painter);
-        if(graphs[i]->get_Kind()==kpolygon){
-            graphs[i]->redraw(&painter);
-        }
-        if(graphs[i]->get_fill()==true){
-            graphs[i]->fillgraph(&this->painter);
+        if(graphs[i]->get_Kind()==kellipse){
+            if(graphs[i]->get_is_rotate()==true){
+                graphs[i]->redraw(&painter);
+            }else{
+                graphs[i]->draw(&this->painter);
+            }
+        }else{
+            graphs[i]->draw(&this->painter);
+            if(graphs[i]->get_Kind()==kpolygon){
+                graphs[i]->redraw(&painter);
+            }
+            if(graphs[i]->get_fill()==true){
+                graphs[i]->fillgraph(&this->painter);
+            }
         }
     }
     painter.end();

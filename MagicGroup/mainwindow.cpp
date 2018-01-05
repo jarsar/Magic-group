@@ -38,6 +38,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->polygonconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_polygon_finally()));
     //圆，椭圆，多边形填充
     connect(ui->fillButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(fill_color()));
+    //设置图形变换属性
+    this->ui->myGLWidget->set_graph_change(ui->spinBox_tx,ui->spinBox_ty,ui->spinBox_rotate_x,ui->spinBox_rotate_y,ui->SpinBox_angel,ui->spinBox_zoom_x,ui->spinBox_zoom_y,ui->SpinBox_zfactor_x,ui->SpinBox_zfactor_y);
+    //平移
+    connect(ui->traconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(translation_graph()));
+    //旋转
+    connect(ui->rotateconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(rotate_graph()));
+    //缩放
+    connect(ui->zoomconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(zoom_graph()));
 }
 
 MainWindow::~MainWindow()

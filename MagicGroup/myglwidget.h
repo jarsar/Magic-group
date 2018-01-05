@@ -16,6 +16,7 @@
 #include<QSpinBox>
 #include<QLabel>
 #include<qstackedwidget.h>
+#include<QDoubleSpinBox>
 class MyGraph;
 class Line;
 class Round;
@@ -51,6 +52,14 @@ private:
     //多边形
     Polygon *polygon;
     QSpinBox *px,*py;
+    //平移属性
+    QSpinBox *tx,*ty;
+    //旋转属性
+    QDoubleSpinBox *angel;
+    QSpinBox *rotate_x,*rotate_y;
+    //缩放属性
+    QSpinBox *zoom_x,*zoom_y;
+    QDoubleSpinBox *factor_x,*factor_y;
 public:
     MyGLWidget(QWidget * parent = 0);
     ~MyGLWidget();
@@ -67,6 +76,8 @@ public:
     void set_ellipse(QSpinBox *ex,QSpinBox *ey,QSpinBox *ea,QSpinBox *eb);
     //设置多边形属性
     void set_polygon(QSpinBox *px,QSpinBox *py);
+    //设置图形变换属性
+    void set_graph_change(QSpinBox *tx,QSpinBox *ty,QSpinBox *rotate_x,QSpinBox *rotate_y,QDoubleSpinBox *angel,QSpinBox *zoom_x,QSpinBox *zoom_y,QDoubleSpinBox *factor_x,QDoubleSpinBox *factor_y);
 protected:
     void initializeGL();
     void paintGL();
@@ -88,6 +99,9 @@ private slots:
     void draw_polygon();
     void draw_polygon_finally();
     void fill_color();
+    void translation_graph();
+    void rotate_graph();
+    void zoom_graph();
 };
 
 #endif // GLWIDGET_H

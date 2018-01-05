@@ -14,6 +14,7 @@ protected:
     Kind kind;
     QPen *pen;
     bool is_fill;
+    bool is_rotate;
 public:
      MyGraph();
      void set_color(QColor color);
@@ -26,6 +27,7 @@ public:
      virtual void fillgraph(QPainter *painter){};
      bool get_fill();
      Kind get_Kind();
+     bool get_is_rotate();
 };
 
 #endif // GRAPH_H

@@ -196,3 +196,31 @@ void Polygon::fillgraph(QPainter *painter){
         }
     }
 }
+
+void Polygon::traslation_polygon(GLint x, GLint y)
+{
+    for(int i=0;i<this->points.size();i++){
+        this->points[i]->rx()+=x;
+        this->points[i]->ry()+=y;
+    }
+}
+
+void Polygon::rotate_polygon(double x, double y, double angel)
+{
+    double radian=(3.14159/180)*angel;
+    double old_x,old_y;
+    for(int i=0;i<points.size();i++){
+        old_x=points[i]->rx();
+        old_y=points[i]->ry();
+        points[i]->rx()=x+qCos(radian)*(old_x-x)-qSin(radian)*(old_y-y);
+        points[i]->ry()=y+qSin(radian)*(old_x-x)+qCos(radian)*(old_y-y);
+    }
+}
+
+void Polygon::zoom_polyogn(double x, double y, double factor_x, double factor_y)
+{
+    for(int i=0;i<points.size();i++){
+        points[i]->rx()=factor_x*points[i]->rx()+(1-factor_x)*x;
+        points[i]->ry()=factor_y*points[i]->ry()+(1-factor_y)*y;
+    }
+}

@@ -11,5 +11,8 @@ public:
     Line();
     void setline(GLint x0,GLint y0,GLint x1,GLint y1);
     void draw(QPainter *painter);
+    void translation_line(GLint x,GLint y);
+    void rotate_line(double x,double y,double angel);
+    void zoom_line(double x,double y,double factor_x,double factor_y);
 };
 #endif // LINE_H

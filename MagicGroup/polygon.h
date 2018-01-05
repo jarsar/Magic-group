@@ -26,6 +26,9 @@ public:
     void draw(QPainter *painter);
     void redraw(QPainter *painter);
     void fillgraph(QPainter *painter);
+    void traslation_polygon(GLint x,GLint y);
+    void rotate_polygon(double x,double y,double angel);
+    void zoom_polyogn(double x,double y,double factor_x,double factor_y);
 };
 
 #endif // POLYGON_H

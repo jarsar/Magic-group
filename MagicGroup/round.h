@@ -16,6 +16,9 @@ public:
     void setround(QPoint p,GLint r);
     void draw(QPainter *painter);
     void fillgraph(QPainter *painter);
+    void translation_round(GLint x,GLint y);
+    void rotate_round(double x,double y,double angel);
+    void zoom_round(double x,double y,double factor_x,double factor_y);
 };
 
 #endif // ROUND_H

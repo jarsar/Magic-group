@@ -14,6 +14,11 @@ Kind MyGraph::get_Kind(){
     return this->kind;
 }
 
+bool MyGraph::get_is_rotate()
+{
+    return this->is_rotate;
+}
+
 bool MyGraph::get_fill(){
     return this->is_fill;
 }

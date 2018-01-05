@@ -97,7 +97,34 @@ void Round::fillgraph(QPainter *painter){
         x2=this->center.x()+qSqrt(r*r-i*i);
         y1=this->center.y()-i;
         this->link_twopoints(x1,x2,y1,painter);
-        }
+    }
+}
+
+void Round::translation_round(GLint x, GLint y)
+{
+    this->center.rx()+=x;
+    this->center.ry()+=y;
+}
+
+void Round::rotate_round(double x, double y, double angel)
+{
+    double radian=(3.14159/180)*angel;
+    double old_x,old_y;
+    old_x=center.rx();
+    old_y=center.ry();
+    center.rx()=x+qCos(radian)*(old_x-x)-qSin(radian)*(old_y-y);
+    center.ry()=y+qSin(radian)*(old_x-x)+qCos(radian)*(old_y-y);
+}
+
+void Round::zoom_round(double x, double y, double factor_x, double factor_y)
+{
+    double multiple,old_x,old_y;
+    old_x=center.rx();
+    old_y=center.ry();
+    center.rx()=factor_x*center.rx()+(1-factor_x)*x;
+    center.ry()=factor_y*center.ry()+(1-factor_y)*y;
+    multiple=qSqrt((x-center.rx())*(x-center.rx())+(y-center.ry())*(y-center.ry()))/qSqrt((old_x-x)*(old_x-x)+(old_y-y)*(old_y-y));
+    r=multiple*r;
 }
 
 void Round::link_twopoints(int x1,int x2,int y1,QPainter *painter){
