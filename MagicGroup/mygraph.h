@@ -6,6 +6,7 @@
 #include<qmath.h>
 #include<QVector>
 #include<QColor>
+#include<QPointF>
 enum Kind{
     kline,kround,kellipse,kcurve,kpolygon,k3D
 };

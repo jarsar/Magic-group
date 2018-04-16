@@ -22,5 +22,7 @@
         <file>zoomStatic.png</file>
         <file>roundPressed.png</file>
         <file>roundStatic.png</file>
+        <file>saveStatic.png</file>
+        <file>savePressed.png</file>
     </qresource>
 </RCC>

@@ -105,6 +105,13 @@
           </property>
          </widget>
         </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="saveButton">
+          <property name="text">
+           <string>保存</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="1" column="0">
@@ -113,7 +120,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>7</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page"/>
         <widget class="QWidget" name="page_line">
@@ -316,7 +323,90 @@
           </layout>
          </widget>
         </widget>
-        <widget class="QWidget" name="page_curve"/>
+        <widget class="QWidget" name="page_curve">
+         <widget class="QLabel" name="label_30">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>0</y>
+            <width>41</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>曲线</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QWidget" name="formLayoutWidget_8">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>122</width>
+            <height>211</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_7">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="startcurveButton">
+             <property name="text">
+              <string>开始</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_31">
+             <property name="text">
+              <string>控制点X</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBox_cx">
+             <property name="maximum">
+              <number>628</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_32">
+             <property name="text">
+              <string>控制点Y</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinBox_cy">
+             <property name="maximum">
+              <number>520</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="addcurveButton">
+             <property name="text">
+              <string>添加</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="confirmcurveButton">
+             <property name="text">
+              <string>完成</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
         <widget class="QWidget" name="page_ellipse">
          <widget class="QLabel" name="label_10">
           <property name="geometry">
@@ -535,7 +625,7 @@
            <rect>
             <x>0</x>
             <y>30</y>
-            <width>121</width>
+            <width>128</width>
             <height>221</height>
            </rect>
           </property>
@@ -716,7 +806,7 @@
            <rect>
             <x>0</x>
             <y>30</y>
-            <width>121</width>
+            <width>139</width>
             <height>221</height>
            </rect>
           </property>

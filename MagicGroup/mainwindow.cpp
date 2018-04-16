@@ -24,12 +24,17 @@ MainWindow::MainWindow(QWidget *parent) :
     //设置图形属性
     this->ui->myGLWidget->set_line(ui->spinBox_lx0,ui->spinBox_ly0,ui->spinBox_lx1,ui->spinBox_ly1);
     this->ui->myGLWidget->set_round(ui->spinBox_rR,ui->spinBox_rx,ui->spinBox_ry);
+    this->ui->myGLWidget->set_curve(ui->spinBox_cx,ui->spinBox_cy);
     this->ui->myGLWidget->set_ellipse(ui->spinBox_ex,ui->spinBox_ey,ui->spinBox_ea,ui->spinBox_eb);
     this->ui->myGLWidget->set_polygon(ui->spinBox_px,ui->spinBox_py);
     //修改直线
     connect(ui->lineconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_line()));
     //修改圆
     connect(ui->roundconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_round()));
+    //画曲线
+    connect(ui->startcurveButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(create_curve()));
+    connect(ui->addcurveButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_curve()));
+    connect(ui->confirmcurveButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(end_curve()));
     //修改椭圆
     connect(ui->ellipseconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(draw_ellipse()));
     //画多边形
@@ -46,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->rotateconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(rotate_graph()));
     //缩放
     connect(ui->zoomconfirmButton,SIGNAL(clicked(bool)),ui->myGLWidget,SLOT(zoom_graph()));
+    //截图
+//    connect(saveToolButton,SIGNAL(clicked(bool)),this,SLOT(savegraph()));
+    connect(ui->saveButton,SIGNAL(clicked(bool)),this,SLOT(savegraph()));
 }
 
 MainWindow::~MainWindow()
@@ -88,7 +96,7 @@ void MainWindow::mytoolbar(){
 
     QAction *fillAction=new QAction(QString::QString("fill"));
     fillToolButton=new ToolButton(QIcon::QIcon(":/new/png/fillStatic.png"),QIcon::QIcon(":/new/png/fillPressed.png"),count,graph_judge,fillAction);
-    ui->mainToolBar->addWidget(fillToolButton);
+//    ui->mainToolBar->addWidget(fillToolButton);
 
     QAction *cutAction=new QAction(QString::QString("cut"));
     cutToolButton=new ToolButton(QIcon::QIcon(":/new/png/cutStatic.png"),QIcon::QIcon(":/new/png/cutPressed.png"),count,graph_judge,cutAction);
@@ -97,6 +105,10 @@ void MainWindow::mytoolbar(){
     QAction *triDAction=new QAction(QString::QString("3D"));
     triDToolButton=new ToolButton(QIcon::QIcon(":/new/png/3dStatic.png"),QIcon::QIcon(":/new/png/3dPressed.png"),count,graph_judge,triDAction);
     ui->mainToolBar->addWidget(triDToolButton);
+
+    QAction *saveAction=new QAction(QString::QString("saveAction"));
+    saveToolButton=new ToolButton(QIcon::QIcon(":/new/png/saveStatic.png"),QIcon::QIcon(":/new/png/savePressed.png"),count,graph_judge,saveAction);
+    //ui->mainToolBar->addWidget(saveToolButton);
 }
 
 void MainWindow::set_choosemenu(){
@@ -137,4 +149,13 @@ void MainWindow::set_choosemenu(){
     default:
         break;
     }
+}
+
+void MainWindow::savegraph()
+{
+    QImage p=ui->myGLWidget->grabFramebuffer();
+    QString filePathName="myGLwidget";
+    filePathName+=QDateTime::currentDateTime().toString("yyyy-MM-dd hh-mm-ss-zzz");
+    filePathName+=".png";
+    p.save(filePathName);
 }

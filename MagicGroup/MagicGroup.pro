@@ -33,7 +33,9 @@ SOURCES += \
     curve.cpp \
     ellipse.cpp \
     round.cpp \
-    polygon.cpp
+    polygon.cpp \
+    threed.cpp \
+    cut.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +46,9 @@ HEADERS += \
     curve.h \
     ellipse.h \
     round.h \
-    polygon.h
+    polygon.h \
+    threed.h \
+    cut.h
 
 FORMS += \
     mainwindow.ui

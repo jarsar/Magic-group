@@ -30,6 +30,12 @@ void MyGLWidget::set_round(QSpinBox *rR, QSpinBox *rx, QSpinBox *ry){
     this->ry=ry;
 }
 
+void MyGLWidget::set_curve(QSpinBox *cx, QSpinBox *cy)
+{
+    this->cx=cx;
+    this->cy=cy;
+}
+
 void MyGLWidget::set_ellipse(QSpinBox *ex, QSpinBox *ey, QSpinBox *ea, QSpinBox *eb){
     this->ex=ex;
     this->ey=ey;
@@ -221,6 +227,26 @@ void MyGLWidget::draw_round(){
     this->redraw();
 }
 
+void MyGLWidget::create_curve()
+{
+    curve=new Curve();
+    graph=curve;
+}
+
+void MyGLWidget::draw_curve()
+{
+    curve->setcurve(cx->value(),cy->value());
+    graph=curve;
+    painter.begin(this);
+    graph->draw(&painter);
+    painter.end();
+}
+
+void MyGLWidget::end_curve()
+{
+    graphs.push_back(graph);
+}
+
 void MyGLWidget::create_polygon(){
     polygon=new Polygon();
     graph=polygon;
@@ -267,6 +293,7 @@ void MyGLWidget::paintGL()
     QPen pen;
     pen.setColor(Qt::black);
     painter.setPen(pen);
+    this->redraw();
 }
 
 void MyGLWidget::resizeGL()

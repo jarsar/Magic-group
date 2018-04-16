@@ -11,6 +11,7 @@
 #include<iostream>
 #include<mygraph.h>
 #include<round.h>
+#include<curve.h>
 #include<ellipse.h>
 #include<polygon.h>
 #include<QSpinBox>
@@ -46,6 +47,9 @@ private:
     //圆
     Round *round;
     QSpinBox *rR,*rx,*ry;
+    //曲线
+    Curve *curve;
+    QSpinBox *cx,*cy;
     //椭圆
     Ellipse *ellipse;
     QSpinBox *ex,*ey,*ea,*eb;
@@ -72,6 +76,8 @@ public:
     void set_line(QSpinBox *lx0,QSpinBox *ly0,QSpinBox *lx1,QSpinBox *ly1);
     //设置圆属性
     void set_round(QSpinBox *rR,QSpinBox *rx,QSpinBox *ry);
+    //设置曲线属性
+    void set_curve(QSpinBox *cx,QSpinBox *cy);
     //设置椭圆属性
     void set_ellipse(QSpinBox *ex,QSpinBox *ey,QSpinBox *ea,QSpinBox *eb);
     //设置多边形属性
@@ -94,6 +100,9 @@ private slots:
     void setcolor();
     void draw_line();
     void draw_round();
+    void create_curve();
+    void draw_curve();
+    void end_curve();
     void draw_ellipse();
     void create_polygon();
     void draw_polygon();

@@ -8,6 +8,8 @@
 #include"line.h"
 #include<iostream>
 #include<QList>
+#include<QMessageBox>
+#include<QDateTime>
 namespace Ui {
 class MainWindow;
 }
@@ -37,6 +39,7 @@ private:
     ToolButton *fillToolButton;
     ToolButton *cutToolButton;
     ToolButton *triDToolButton;
+    ToolButton *saveToolButton;
 public:
     int *count;//用于判断toolbar上是哪个action
     int *graph_judge;//用于判断哪个action处于active状态
@@ -45,6 +48,7 @@ signals:
     void choosemenu(int index);
 private slots:
     void set_choosemenu();
+    void savegraph();
 };
 
 #endif // MAINWINDOW_H
